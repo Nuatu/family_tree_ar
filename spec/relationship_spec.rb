@@ -35,12 +35,22 @@ describe Relationship do
     rhonda_dad = Person.create({:name => "RhondaDad"})
     rhonda_mom = Person.create({:name => "RhondaMom"})
     Relationship.make_connection({:parents => [steve, rhonda], :child => robert})
-
     Relationship.make_connection({:parents => [steve_dad, steve_mom], :child => steve})
-
     Relationship.make_connection({:parents => [rhonda_dad, rhonda_mom], :child => rhonda})
-
     expect(robert.grandparents).to eq [steve_dad, steve_mom, rhonda_dad, rhonda_mom]
+  end
 
+  it 'returns the siblings for a given person' do
+    steve = Person.create({:name => "Steve"})
+    rhonda = Person.create({:name => "Rhonda"})
+    robert = Person.create({:name => "Robert"})
+    sally = Person.create({:name => "Sally"})
+    Relationship.make_connection({:parents => [steve, rhonda], :child => robert})
+    Relationship.make_connection({:parents => [steve, rhonda], :child => sally})
+    expect(robert.siblings).to eq [sally]
+    expect(sally.siblings).to eq [robert]
+    # molly = Person.create({:name => "Molly"})
+    # Relationship.make_connection({:parents => [steve, rhonda], :child => molly})
+    # expect(sally.siblings).to eq [robert, sally]
   end
 end

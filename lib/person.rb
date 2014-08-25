@@ -17,13 +17,38 @@ class Person < ActiveRecord::Base
   def grandparents
     grandparents = []
     self.parents.each do |parent|
-
       parent.parents.each do |x|
         grandparents << x
       end
     end
     grandparents
   end
+
+
+  def siblings
+    siblings = []
+
+    one = self.parents[0]
+    three = []
+
+    two = Relationship.where(:parent_id => one.id)
+
+    two.each do |person|
+      three << person.person_id
+    end
+
+    three.delete(self.id)
+
+    # three = Person.where(:id => two[1].person_id)
+
+
+
+    # self.parents.each do |parent|
+    #   one.push(Relationship.where(:parent_id => parent.id))
+    # end
+
+  end
+
 
   private
 
