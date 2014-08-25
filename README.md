@@ -10,3 +10,7 @@ Future features:
 * Reporting parents
 * Reporting siblings, cousins, uncles/aunts, etc.
 * Tracking divorces
+
+###Authors: Nuatu Tseggai & Dustin Lewis
+
+August 2014
