@@ -14,11 +14,24 @@ class Person < ActiveRecord::Base
     end
   end
 
-private
+  def grandparents
+    grandparents = []
+    self.parents.each do |parent|
+
+      parent.parents.each do |x|
+        grandparents << x
+      end
+    end
+    grandparents
+  end
+
+  private
+
 
   def make_marriage_reciprocal
     if spouse_id_changed?
       spouse.update(:spouse_id => id)
     end
   end
+
 end
